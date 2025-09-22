@@ -2,12 +2,13 @@
 const http = require('http');
 const url = require('url');
 
-// Порт можно оставить локальный, для демонстрации
+// Порт для Railway или локальный
 const PORT = process.env.PORT || 8000;
-// Путь, соответствующий email
-const EMAIL_PATH = '/app/krivelo2017_mail_ru'; // email: krivelo2017@mail.ru → krivelo2017_mail_ru
 
-// Вычисление НОД и НОК
+// Путь, соответствующий email
+const EMAIL_PATH = '/app/krivelo2017_mail_ru'; // krivelo2017@mail.ru → krivelo2017_mail_ru
+
+// Функции для НОД и НОК
 function gcd(a, b) {
   while (b) {
     [a, b] = [b, a % b];
@@ -35,5 +36,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () =>
-  console.log(`Server running locally: http://localhost:${PORT}${EMAIL_PATH}?x={}&y={}`),
+  console.log(`Server running: http://localhost:${PORT}${EMAIL_PATH}?x={}&y={}`),
 );
