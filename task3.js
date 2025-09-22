@@ -3,8 +3,7 @@ const http = require('http');
 const url = require('url');
 
 // Порт можно оставить локальный, для демонстрации
-const PORT = 8000;
-
+const PORT = process.env.PORT || 8000;
 // Путь, соответствующий email
 const EMAIL_PATH = '/app/krivelo2017_mail_ru'; // email: krivelo2017@mail.ru → krivelo2017_mail_ru
 
