@@ -1,44 +1,31 @@
-// task3.js — Node.js HTTP GET сервер для НОК
 const http = require('http');
 const url = require('url');
 
-// Порт для Railway
-const PORT = process.env.PORT || 8000;
-
-// Путь для метода (email с подчёркиваниями)
 const EMAIL_PATH = '/app/krivelo2017_mail_ru';
 
-// Вычисление НОД и НОК
 function gcd(a, b) {
-  while (b) {
-    [a, b] = [b, a % b];
-  }
-  return Math.abs(a);
+  return b ? gcd(b, a % b) : a;
 }
 function lcm(a, b) {
-  return a > 0 && b > 0 ? (a / gcd(a, b)) * b : 0;
+  return (a * b) / gcd(a, b);
 }
 
 const server = http.createServer((req, res) => {
   const q = url.parse(req.url, true);
-
-  if (q.pathname !== EMAIL_PATH) {
-    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-    res.end('NaN');
-    return;
+  if (q.pathname === EMAIL_PATH) {
+    const x = parseInt(q.query.x),
+      y = parseInt(q.query.y);
+    if (isNaN(x) || isNaN(y) || x <= 0 || y <= 0) {
+      res.end('NaN');
+    } else {
+      res.end(String(lcm(x, y)));
+    }
+  } else {
+    res.statusCode = 404;
+    res.end('Not Found');
   }
-
-  let x = q.query.x,
-    y = q.query.y;
-  let n = /^[1-9]\d*$/.test(x) ? parseInt(x) : NaN;
-  let m = /^[1-9]\d*$/.test(y) ? parseInt(y) : NaN;
-  let out = !isNaN(n) && !isNaN(m) ? lcm(n, m).toString() : 'NaN';
-
-  res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-  res.end(out);
 });
 
-// Запуск сервера
-server.listen(PORT, () =>
-  console.log(`Server running on port ${PORT}, path: ${EMAIL_PATH}?x={4}&y={6}`),
-);
+server.listen(process.env.PORT || 8080, () => {
+  console.log(`Server running on port ${process.env.PORT || 8080}, path: ${EMAIL_PATH}?x={}&y={}`);
+});
