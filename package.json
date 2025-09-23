@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "task3.js",
   "scripts": {
-  "start": "node task3.js"
-},
+    "start": "node task3.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

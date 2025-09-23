@@ -6,7 +6,7 @@ const url = require('url');
 const PORT = process.env.PORT || 8000;
 
 // Путь для метода (email с подчёркиваниями)
-const EMAIL_PATH = '/app/krivelo2017_mail_ru'; // krivelo2017@mail.ru → krivelo2017_mail_ru
+const EMAIL_PATH = '/app/krivelo2017_mail_ru';
 
 // Вычисление НОД и НОК
 function gcd(a, b) {
@@ -40,5 +40,5 @@ const server = http.createServer((req, res) => {
 
 // Запуск сервера
 server.listen(PORT, () =>
-  console.log(`Server running on port ${PORT}, path: ${EMAIL_PATH}?x={}&y={}`),
+  console.log(`Server running on port ${PORT}, path: ${EMAIL_PATH}?x={4}&y={6}`),
 );
